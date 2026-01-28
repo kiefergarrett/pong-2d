@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://hdr0xi6kg2gt"]
+
+[ext_resource type="Texture2D" uid="uid://d3ty8k12h1bgg" path="res://assets/pong-background.png" id="1_8rem4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi7kc"]
+size = Vector2(1918, 38.5)
+
+[node name="Node2D" type="StaticBody2D" groups=["boundary"]]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(959, 18.5)
+shape = SubResource("RectangleShape2D_gi7kc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(959, 1061)
+shape = SubResource("RectangleShape2D_gi7kc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(12, 12)
+texture = ExtResource("1_8rem4")
+centered = false

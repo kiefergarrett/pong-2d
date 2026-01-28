@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl8bnbu3epapn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uavv5"]
+normal = Vector2(-1, 0)
+
+[node name="score_box" type="Area2D" groups=["scorebox"]]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_uavv5")
