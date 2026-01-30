@@ -8,6 +8,8 @@ extends Node
 @export var score_right : HBoxContainer
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @export var score_sound : AudioStream
+@onready var win_screen : Control = $"../UI/WinScreen"
+@onready var win_screen_text : Label = $"../UI/WinScreen/Panel/Label"
 
 var left_score = 0
 var right_score = 0
@@ -16,10 +18,13 @@ var label_left : Label
 var label_right : Label
 var ball
 var ai_paddle
+var can_respawn : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	ball = ball_scene.instantiate()
+	ball.process_mode = Node.PROCESS_MODE_PAUSABLE
 	ai_paddle = ai_paddle_scene.instantiate()
 	ball.global_position = ball_spawn_position
 	ball.ball_scored.connect(on_ball_scored)
@@ -33,6 +38,7 @@ func _ready() -> void:
 	label_left = score_left.get_node("Label")
 	label_right = score_right.get_node("Label")
 
+		
 
 func on_ball_scored(goal: String) -> void:
 	if score_sound == null:
@@ -47,15 +53,31 @@ func on_ball_scored(goal: String) -> void:
 	elif goal == "right":
 		right_score = right_score + 1
 		label_right.text = str(right_score)
+		
+	if right_score == 5:
+		can_respawn = false
+		ball.queue_free()
+		win_screen.visible = true
+		win_screen_text.text = "YOU WIN!!"
+	
+	if left_score == 5:
+		can_respawn = false
+		ball.queue_free()
+		win_screen.visible = true
+		win_screen_text.text = "YOU LOSE!!"
+		
 	
 	call_deferred("_respawn_ball")
 
 func _respawn_ball() -> void:
+	if !can_respawn:
+		return
 	# If there's an existing ball, remove it safely
 	if is_instance_valid(ball):
 		ball.queue_free()
 
 	ball = ball_scene.instantiate()
+	ball.process_mode = Node.PROCESS_MODE_PAUSABLE
 	ball.global_position = ball_spawn_position
 
 	# Connect before adding is fine either way, but this is clean

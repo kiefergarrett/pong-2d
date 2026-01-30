@@ -1,0 +1,11 @@
+res://scenes/level.tscn
+res://scripts/game_manager.gd
+res://scenes/ball.tscn
+res://scenes/player_paddle.tscn
+res://scripts/ai_paddle.gd
+res://scenes/ai_paddle.tscn
+res://scripts/pause_menu.gd
+res://scripts/main_menu.gd
+res://scenes/game.tscn
+res://scenes/main_menu.tscn
+res://scripts/win_screen.gd

@@ -1,0 +1,211 @@
+[gd_scene load_steps=19 format=3 uid="uid://q2upqy25gjk5"]
+
+[ext_resource type="Script" uid="uid://c4lxy3kgspc32" path="res://scripts/game_manager.gd" id="1_vtaks"]
+[ext_resource type="PackedScene" uid="uid://1j78051dlaxx" path="res://scenes/ball.tscn" id="2_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://b0gvfjob64sit" path="res://scenes/ai_paddle.tscn" id="3_dinhu"]
+[ext_resource type="AudioStream" uid="uid://b1i1kfjuvs2ij" path="res://assets/sounds/pong-score.wav" id="4_kvuet"]
+[ext_resource type="PackedScene" uid="uid://hdr0xi6kg2gt" path="res://scenes/stage.tscn" id="5_trtic"]
+[ext_resource type="PackedScene" uid="uid://bgyil4njnupl5" path="res://scenes/player_paddle.tscn" id="6_ir15t"]
+[ext_resource type="PackedScene" uid="uid://dl8bnbu3epapn" path="res://scenes/score_box.tscn" id="7_ca42v"]
+[ext_resource type="FontFile" uid="uid://c15ufhwvvym6l" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="8_rysoc"]
+[ext_resource type="Script" uid="uid://baxdas0bsn3b4" path="res://scripts/pause_menu.gd" id="10_264po"]
+[ext_resource type="Script" uid="uid://dtahsge5471j8" path="res://scripts/win_screen.gd" id="10_vtaks"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b121j"]
+font = ExtResource("8_rysoc")
+font_size = 200
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c41q"]
+bg_color = Color(0.08809082, 0.104912676, 0.17220007, 0.9019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olg7q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1rx8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8iemx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtaks"]
+bg_color = Color(0.08809082, 0.104912676, 0.17220007, 0.9019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinhu"]
+
+[node name="game" type="Node2D"]
+
+[node name="game_manager" type="Node" parent="." node_paths=PackedStringArray("score_left", "score_right")]
+script = ExtResource("1_vtaks")
+ball_scene = ExtResource("2_kvpfn")
+ai_paddle_scene = ExtResource("3_dinhu")
+score_left = NodePath("../score_left")
+score_right = NodePath("../score_right")
+score_sound = ExtResource("4_kvuet")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="game_manager"]
+
+[node name="level" parent="." instance=ExtResource("5_trtic")]
+
+[node name="player_paddle" parent="." instance=ExtResource("6_ir15t")]
+position = Vector2(1800, 540)
+scale = Vector2(1.0085557, 1)
+SPEED = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="score_box_left" parent="." groups=["score_box_left"] instance=ExtResource("7_ca42v")]
+position = Vector2(1940, 540)
+rotation = -2.4343895e-05
+
+[node name="score_box_right" parent="." groups=["score_box_right"] instance=ExtResource("7_ca42v")]
+position = Vector2(-25, 540)
+rotation = 3.1415925
+
+[node name="score_left" type="HBoxContainer" parent="."]
+offset_left = 480.0
+offset_top = 135.0
+offset_right = 613.0
+offset_bottom = 314.0
+
+[node name="Label" type="Label" parent="score_left"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_b121j")
+
+[node name="score_right" type="HBoxContainer" parent="."]
+offset_left = 1340.0
+offset_top = 135.0
+offset_right = 1473.0
+offset_bottom = 314.0
+
+[node name="Label" type="Label" parent="score_right"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_b121j")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="PauseMenu" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("10_264po")
+
+[node name="Panel" type="Panel" parent="UI/PauseMenu"]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8c41q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="UI/PauseMenu/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_rysoc")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_olg7q")
+text = "Resume"
+
+[node name="Restart" type="Button" parent="UI/PauseMenu/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_rysoc")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_t1rx8")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UI/PauseMenu/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_rysoc")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_8iemx")
+text = "Quit"
+
+[node name="WinScreen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("10_vtaks")
+
+[node name="Panel" type="Panel" parent="UI/WinScreen"]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtaks")
+
+[node name="Label" type="Label" parent="UI/WinScreen/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -849.5
+offset_top = 176.65
+offset_right = 849.5
+offset_bottom = 444.65
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("8_rysoc")
+theme_override_font_sizes/font_size = 250
+text = "YOU WIN!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/WinScreen/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -68.630005
+offset_right = 300.0
+offset_bottom = 331.37024
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="UI/WinScreen/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_rysoc")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvpfn")
+text = "Play Again"
+
+[node name="Quit" type="Button" parent="UI/WinScreen/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_rysoc")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_dinhu")
+text = "Quit"

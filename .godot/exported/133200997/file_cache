@@ -1,6 +1,7 @@
-res://scenes/ai_paddle.tscn::50eff8637e1db05189ff278603758c57::1769565360::res://.godot/exported/133200997/export-7d99f615bd2de98b31ba840c9982ccf1-ai_paddle.scn
-res://scenes/ball.tscn::42f10b94b3fd80bdb245da807f6948c0::1769566119::res://.godot/exported/133200997/export-d687370f64a28adc6cd2dc42f9ce6f46-ball.scn
-res://scenes/level.tscn::ea58ea03782f2f3cd30400d92589a123::1769566114::res://.godot/exported/133200997/export-a0631f9feb269b9ee464fe0e4794e617-level.scn
-res://scenes/player_paddle.tscn::1762862c92396d48d1f23a28423c4b17::1769548536::res://.godot/exported/133200997/export-808a26eec41ae0eca328cdcc58ff8943-player_paddle.scn
+res://scenes/ai_paddle.tscn::50eff8637e1db05189ff278603758c57::1769794277::res://.godot/exported/133200997/export-7d99f615bd2de98b31ba840c9982ccf1-ai_paddle.scn
+res://scenes/ball.tscn::587e4b8cae6dfcf19c11bceed400d47b::1769793901::res://.godot/exported/133200997/export-d687370f64a28adc6cd2dc42f9ce6f46-ball.scn
+res://scenes/player_paddle.tscn::5db716779b9acd3ff28ee572f06c2b4a::1769794093::res://.godot/exported/133200997/export-808a26eec41ae0eca328cdcc58ff8943-player_paddle.scn
 res://scenes/score_box.tscn::4a101900503438aba4b66a7f7bcb1365::1769365276::res://.godot/exported/133200997/export-a5a54418ff2e32ff2cf4657f1b72d528-score_box.scn
 res://scenes/stage.tscn::4a12931060ec9b3f7379e3ec5376884b::1769561116::res://.godot/exported/133200997/export-6d0c05af89768d4ee0de197e8c576f84-stage.scn
+res://scenes/game.tscn::00532708a7a2a24e0e8088b4eb7b4546::1769800638::res://.godot/exported/133200997/export-c2a7af834e91ff64325daddf58e45dc0-game.scn
+res://scenes/main_menu.tscn::50961c91bd113149bd432359c5894bd1::1769801045::res://.godot/exported/133200997/export-ea5c6ad4629af728dc514cefde332394-main_menu.scn

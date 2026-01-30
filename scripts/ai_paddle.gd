@@ -5,7 +5,9 @@ extends AnimatableBody2D
 var ball : Node2D = null
 
 func _physics_process(delta: float) -> void:
+	
 	if ball == null:
+		print("AI lost ball reference")
 		return
 
 	var target_y = ball.global_position.y
